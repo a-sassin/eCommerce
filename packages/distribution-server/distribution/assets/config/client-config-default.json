@@ -1,0 +1,173 @@
+{
+    "button": {
+        "updateISV": true,
+        "selector": ".btn"
+    },
+    "product": {
+        "selector": ".product-wrapper a",
+        "text": "TrustMeRetail",
+        "updateISV": true
+    },
+    "page": {
+        "selector": "body",
+        "updateISV": true
+    },
+    "font": {
+        "selector": "*, .nav-links .mat-badge-content, .mat-menu-item",
+        "updateISV": true,
+        "fontFamily": "Outfit, sans-serif"
+    },
+    "nav": {
+        "selector": "nav",
+        "options": [
+            {
+                "key": "shoppingCart",
+                "text": ""
+            },
+            {
+                "key": "login",
+                "text": "Login"
+            },
+            {
+                "key": "signup",
+                "text": "Sign Up"
+            }
+        ],
+        "dropDowns": [
+            {
+                "key": "mens",
+                "text": "Mens"
+            },
+            {
+                "key": "womens",
+                "text": "Womens"
+            },
+            {
+                "key": "kids",
+                "text": "Kids"
+            },
+            {
+                "key": "accessories",
+                "text": "Accessories"
+            }
+        ]
+    },
+    "form": {
+        "selector": ".form-container",
+        "updateISV": true
+    },
+    "products": [
+        {
+            "productId": "p1",
+            "productImageUrl": "/assets/images/productImages/tile1.png",
+            "productTitle": "Us Polo",
+            "productFullName": "Us Polo Men's Blazer",
+            "productType": "Men's Blazer",
+            "properties": {
+                "Colors": ["Red", "Green", "Blue"],
+                "Size": ["S", "M", "L"]
+            },
+            "oldPrice": "$99",
+            "newPrice": "$41",
+            "onHover": false
+        },
+        {
+            "productId": "p2",
+            "productImageUrl": "/assets/images/productImages/tile2.png",
+            "productTitle": "Mast & Harbour",
+            "productFullName": "Mast & Harbour Men's Formals",
+            "productType": "Men's Blazer",
+            "properties": {
+                "Colors": ["Red", "Green", "Blue"],
+                "Size": ["S", "M", "L"]
+            },
+            "oldPrice": "$99",
+            "newPrice": "$55",
+            "onHover": false
+        },
+        {
+            "productId": "p3",
+            "productImageUrl": "/assets/images/productImages/tile3.png",
+            "productTitle": "Allen Solly",
+            "productFullName": "Allen Solly Women's Blazer",
+            "productType": "Women's Blazer",
+            "properties": {
+                "Colors": ["Red", "Green", "Blue"],
+                "Size": ["S", "M", "L"]
+            },
+            "oldPrice": "$99",
+            "newPrice": "$51",
+            "onHover": false
+        },
+        {
+            "productId": "p4",
+            "productImageUrl": "/assets/images/productImages/tile4.png",
+            "productTitle": "Peter England",
+            "productFullName": "Peter England Men's Suit",
+            "productType": "Men's Blazer",
+            "properties": {
+                "Colors": ["Red", "Green", "Blue"],
+                "Size": ["S", "M", "L"]
+            },
+            "oldPrice": "$99",
+            "newPrice": "$49",
+            "onHover": false
+        },
+        {
+            "productId": "p5",
+            "productImageUrl": "/assets/images/productImages/tile5.png",
+            "productTitle": "Nike",
+            "productFullName": "Nike ladies tshirt",
+            "productType": "Ladies Tshirt",
+            "properties": {
+                "Colors": ["Red", "Green", "Blue"],
+                "Size": ["S", "M", "L"]
+            },
+            "oldPrice": "$99",
+            "newPrice": "$51",
+            "onHover": false
+        },
+        {
+            "productId": "p6",
+            "productImageUrl": "/assets/images/productImages/tile6.png",
+            "productTitle": "Nike",
+            "productFullName": "Nike mens workout",
+            "productType": "Mens workout",
+            "properties": {
+                "Colors": ["Red", "Green", "Blue"],
+                "Size": ["S", "M", "L"]
+            },
+            "oldPrice": "$99",
+            "newPrice": "$55",
+            "onHover": false
+        },
+        {
+            "productId": "p7",
+            "productImageUrl": "/assets/images/productImages/tile7.png",
+            "productTitle": "Levis",
+            "productFullName": "Levis Jeans",
+            "productType": "Mens Jeans",
+            "properties": {
+                "Colors": ["Red", "Green", "Blue"],
+                "Size": ["S", "M", "L"]
+            },
+            "oldPrice": "$99",
+            "newPrice": "$51",
+            "onHover": false
+        },
+        {
+            "productId": "p8",
+            "productImageUrl": "/assets/images/productImages/tile8.png",
+            "productTitle": "Adidas",
+            "productFullName": "Adidas mens jacket",
+            "productType": "Mens jacket",
+            "properties": {
+                "Colors": ["Red", "Green", "Blue"],
+                "Size": ["S", "M", "L"]
+            },
+            "oldPrice": "$99",
+            "newPrice": "$49",
+            "onHover": false
+        }
+    ]
+}

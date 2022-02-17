@@ -1,0 +1,15 @@
+[
+    {
+        "TITLE": "Default",
+        "AUTH_SERVER_BASE_URL": "",
+        "ISV_APP_ID": "",
+        "API_CLIENT_ID": "",
+        "API_CLIENT_SECRET": "",
+        "OIDC_REDIRECT_URI": "/oauth/callback",
+        "OIDC_BASE_URI": "",
+        "OIDC_CLIENT_ID": "",
+        "OIDC_CLIENT_SECRET": "",
+        "THEME_ID": "",
+        "DEFAULT": true
+    }
+]
