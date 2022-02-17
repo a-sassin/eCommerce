@@ -1,0 +1,16 @@
+{
+  "name": "root",
+  "private": true,
+  "version": "1.0.0",
+  "devDependencies": {
+    "lerna": "3.22.1"
+  },
+  "scripts": {
+    "start": "lerna run build-and-run --scope=distribution-server --stream",
+    "dev": "lerna run dev --stream",
+    "prod": "lerna run start-prod --stream",
+    "test": "lerna run test --stream",
+    "prettier": "lerna run prettier  --stream",
+    "lint-fix": "lerna run lint-fix --stream"
+  }
+}
