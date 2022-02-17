@@ -1,0 +1,58 @@
+{
+    "name": "isv-distribution",
+    "version": "0.0.0",
+    "scripts": {
+        "ng": "ng",
+        "start": "bash context_build.sh && ng serve --disable-host-check",
+        "dev": "bash context_build.sh && ng serve --disable-host-check",
+        "build": "bash context_build.sh && ng build --output-path=../distribution-server/angular-build && bash context_build.sh true",
+        "watch": "ng build --watch --configuration development",
+        "lint": "ng lint",
+        "prettier": "prettier --write \"src/app/**/*.*\"",
+        "lint-fix": "ng lint --fix=true"
+    },
+    "private": true,
+    "dependencies": {
+        "@angular/animations": "~13.0.0",
+        "@angular/cdk": "^13.0.2",
+        "@angular/common": "~13.0.0",
+        "@angular/compiler": "~13.0.0",
+        "@angular/core": "~13.0.0",
+        "@angular/forms": "~13.0.0",
+        "@angular/material": "^13.0.2",
+        "@angular/platform-browser": "~13.0.0",
+        "@angular/platform-browser-dynamic": "~13.0.0",
+        "@angular/router": "~13.0.0",
+        "rxjs": "~7.4.0",
+        "tslib": "^2.3.0",
+        "zone.js": "~0.11.4"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "~13.2.2",
+        "@angular-eslint/builder": "13.0.1",
+        "@angular-eslint/eslint-plugin": "13.0.1",
+        "@angular-eslint/eslint-plugin-template": "13.0.1",
+        "@angular-eslint/schematics": "13.0.1",
+        "@angular-eslint/template-parser": "13.0.1",
+        "@angular/cli": "~13.2.2",
+        "@angular/compiler-cli": "~13.0.0",
+        "@types/node": "^12.11.1",
+        "@typescript-eslint/eslint-plugin": "5.3.0",
+        "@typescript-eslint/parser": "5.3.0",
+        "eslint": "^8.2.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-airbnb-typescript": "^16.1.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.25.3",
+        "prettier": "^1.19.1",
+        "typescript": "~4.4.3"
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "bracketSpacing": true,
+        "printWidth": 80,
+        "endOfLine": "lf"
+    }
+}
