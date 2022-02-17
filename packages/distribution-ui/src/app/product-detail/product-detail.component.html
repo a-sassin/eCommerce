@@ -1,0 +1,83 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+<div *ngIf="!loading">
+    <p class="reward">{{ rewardMessage }}</p>
+
+    <div class="totalpage">
+        <div class="rowItems">
+            <div
+                class="bigImage"
+                [ngStyle]="{
+                    'background-image': 'url(' + imageUrl + ')'
+                }"
+            ></div>
+
+            <div class="productInfo">
+                <p class="dressType">
+                    {{ dressType }}
+                </p>
+                <p class="txt productName">{{ productName }}</p>
+                <p class="description">{{ description }}</p>
+                <div class="rowItems">
+                    <p class="txt quantity">{{ quantity }}</p>
+                    <div class="minus">-</div>
+                    <div class="txt count">{{ count }}</div>
+                    <div class="plus">+</div>
+                </div>
+                <div
+                    class="rowItems"
+                    *ngFor="let property of productInfo.properties | keyvalue"
+                >
+                    <div class="txt key">
+                        {{ property.key }}
+                    </div>
+                    <div
+                        class="txt values"
+                        *ngFor="
+                            let value of $any(property.value);
+                            let i = index
+                        "
+                    >
+                        {{ value }}
+                        <div class="underscore" *ngIf="i === 0"></div>
+                    </div>
+                </div>
+                <div class="rowItems">
+                    <div class="couponcode">{{ couponCode }}</div>
+                    <div class="btn-outline coupon-code-box">Coupon code</div>
+                    <button class="btn applybtn">Apply</button>
+                </div>
+                <div class="price">
+                    {{ price }}
+                </div>
+                <div class="btn cartbtn" (click)="addToCart()">
+                    Add to Cart
+                </div>
+            </div>
+        </div>
+
+        <div class="rowItems">
+            <div
+                class="smallImage1"
+                [ngStyle]="{
+                    'background-image': 'url(' + imageUrl + ')'
+                }"
+            ></div>
+
+            <div
+                class="smallImage2"
+                [ngStyle]="{
+                    'background-image': 'url(' + imageUrl + ')'
+                }"
+            ></div>
+        </div>
+
+        <hr />
+
+        <p class="recommendation">Recommendation</p>
+
+        <div class="rowItems">
+            <div class="emptybox" *ngFor="let n of numSequence(4)"></div>
+        </div>
+    </div>
+</div>

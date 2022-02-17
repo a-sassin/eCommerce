@@ -1,0 +1,95 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+<div *ngIf="!loading">
+    <div class="rowItems" *ngIf="productInfo">
+        <div class="sideDiv">
+            <div class="rowItems">
+                <div
+                    class="sideImg"
+                    [ngStyle]="{
+                        'background-image':
+                            'url(' + baseUrl + productInfo.productImageUrl + ')'
+                    }"
+                ></div>
+                <div class="mt-4 ml-2 bold-text">
+                    {{ productName }}
+                    <p class="mt-1 fullName">
+                        {{ productInfo.productFullName }}
+                    </p>
+                </div>
+                <div
+                    class="mt-4 ml-3 bold-text"
+                    *ngFor="let property of productInfo.properties | keyvalue"
+                >
+                    {{ property.key }}
+                    <p class="mt-1 bold-text ">{{ property.value[0] }}</p>
+                </div>
+                <div class="mt-4 ml-3 bold-text">
+                    {{ quantity }}
+                    <div class="rowItems">
+                        <p class="mt-1 bold-text ml-1">-</p>
+                        <p class="mt-1 bold-text ml-1">1</p>
+                        <p class="mt-1 bold-text ml-1">+</p>
+                    </div>
+                </div>
+                <div class="mt-4 ml-3 bold-text">
+                    {{ totalPrice }}
+                    <div class="mt-1 ml-1">{{ productInfo.newPrice }}</div>
+                </div>
+                <a href="/shopping-cart" (click)="onClose()">
+                    <i class="material-icons">cancel</i>
+                </a>
+            </div>
+            <div class="transparentBtn continueBtn" (click)="onContinue()">
+                {{ continue }}
+            </div>
+        </div>
+        <div class="right-box">
+            <p class="mt-2 ml-2 bold-text">{{ orderSummary }}</p>
+            <div class="bottom-line"></div>
+            <div class="rowItems">
+                <div class="mt-2 ml-3 bold-text">{{ actualPrice }}</div>
+                <div class="mt-2 ml-12 bold-text">
+                    {{ productInfo.newPrice }} x 1
+                </div>
+            </div>
+            <div class="rowItems">
+                <div class="mt-2 ml-3 bold-text">{{ productTax }}</div>
+                <div class="mt-2 ml-14 bold-text">
+                    {{ tax }}
+                </div>
+            </div>
+            <div class="rowItems">
+                <div class="mt-2 ml-3 bold-text">{{ shippingCharge }}</div>
+                <div class="mt-2 ml-11 bold-text">
+                    {{ charge }}
+                </div>
+            </div>
+            <div class="pricebtn btn2">
+                <div class="rowItems">
+                    <div class="pricebtnText">{{ totalPrice }}</div>
+                    <div class="totalPrice">{{ totalPriceValue }}</div>
+                </div>
+            </div>
+            <div class="btn proceedBtn" (click)="checkout()">
+                {{ proceedText }}
+            </div>
+            <div class="transparentBtn checkoutBtn">
+                <span class="paypaltxt">
+                    Check out with paypal
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="" *ngIf="!productInfo">
+    <img src="{{ imagePath }}" alt="empty-cart" class="image" />
+
+    <h4>Your shopping cart is empty</h4>
+    <h5>Looks like you haven't made your choice yet</h5>
+    <br />
+
+    <div class="btn shopNowBtn" (click)="onContinue()">
+        {{ shopNow }}
+    </div>
+</div>

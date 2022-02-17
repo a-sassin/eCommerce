@@ -1,0 +1,107 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<div class="form-container form-center" *ngIf="!loading">
+    <div class="form-heading">{{ heading }}</div>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onFormSubmit()">
+        <div
+            class="input-field"
+            [ngClass]="{ 'text-success': signupForm.valid }"
+            *ngFor="let field of inputType"
+        >
+            <label class="form-label" for="{{ field.label }}">{{
+                field.label
+            }}</label>
+
+            <input
+                [ngClass]="
+                    !!validateError && field.fieldName === 'confirmPassword'
+                        ? 'form-invalid'
+                        : 'form-valid'
+                "
+                class="form-input"
+                placeholder="{{ field.placeholder }}"
+                id="{{ field.label }}"
+                [readonly]="field.fieldName === 'email' && emailReadOnly"
+                [ngClass]="[
+                    field.fieldName === 'email' && emailReadOnly
+                        ? 'disabled'
+                        : ''
+                ]"
+                [formControlName]="field.fieldName"
+                [type]="field.type || 'text'"
+                autocomplete="new-password"
+            />
+
+            <div
+                class="err-msg"
+                *ngIf="this.signupForm?.get(field.fieldName)?.touched && this.signupForm?.get(field.fieldName)?.errors?.['required']"
+            >
+                {{ field.label }} {{ requiredErrMessage }}
+            </div>
+        </div>
+        <div
+            class="err-msg"
+            *ngIf="
+                this.signupForm?.get('confirmPassword')?.touched &&
+                validateError
+            "
+        >
+            {{ validateError }}
+        </div>
+        <ol>
+            <li>
+                The minimum password length must be at least
+                {{ pwdMinLength }} characters.
+            </li>
+            <li *ngIf="passwordMinAlphaChars">
+                The password must contain a minimum of
+                {{ passwordMinAlphaChars }} alphabetic characters.
+            </li>
+            <li *ngIf="passwordMinOtherChars || passwordMinDiffChars">
+                The password must contain a minimum of
+                {{ passwordMinOtherChars }} numeric and
+                {{ passwordMinDiffChars }} special characters.
+            </li>
+            <li *ngIf="pwdMaxAge">
+                The password is valid for {{ pwdMaxAge }} days.
+            </li>
+            <li *ngIf="pwdInHistory">
+                A minimum of {{ pwdInHistory }} different passwords must be
+                recorded in the history before the password can be reused.
+            </li>
+            <li *ngIf="pwdMinAge">
+                Password modifications cannot be made until
+                {{ pwdMinAge }} hours have passed.
+            </li>
+        </ol>
+
+        <button
+            color="primary"
+            class="btn mb-2"
+            [disabled]="signupForm.invalid || validateError"
+        >
+            {{ buttonType.name }}
+        </button>
+    </form>
+
+    <div class="or-wrapper">
+        OR
+    </div>
+    <div class="social-providers mb-1">
+        <a [href]="baseUrl + '/login-google'" class="btn-icon white-btn">
+            <img [src]="baseUrl + '/assets/icons/google.png'" />
+        </a>
+        <a [href]="baseUrl + '/login-facebook'" class="btn-icon white-btn">
+            <img [src]="baseUrl + '/assets/icons/facebook.png'" />
+        </a>
+        <a [href]="baseUrl + '/login-facebook'" class="btn-icon white-btn">
+            <img [src]="baseUrl + '/assets/icons/linkedin.png'" />
+        </a>
+        <a [href]="baseUrl + '/login-facebook'" class="white-btn">
+            <img [src]="baseUrl + '/assets/icons/twitter.png'" />
+        </a>
+        <a [href]="baseUrl + '/login-facebook'" class="white-btn">
+            <img [src]="baseUrl + '/assets/icons/github.png'" />
+        </a>
+    </div>
+</div>

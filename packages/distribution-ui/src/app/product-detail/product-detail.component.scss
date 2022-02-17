@@ -1,0 +1,173 @@
+.reward {
+    background-color: #8fabcec3;
+    text-align: center;
+    padding: 0.6rem;
+    color: #031a39;
+    font-weight: 500;
+}
+
+.bigImage {
+    height: 36.25rem;
+    width: 30%;
+    margin: 3.8rem 0rem 0rem 6rem;
+    background-size: cover;
+}
+
+.smallImage1 {
+    height: 5rem;
+    width: 5%;
+    background-size: cover;
+    margin: 1.2rem 0rem 0rem 6.6rem;
+}
+
+.smallImage2 {
+    height: 5rem;
+    width: 5%;
+    background-size: cover;
+    margin: 1.2rem 0rem 0rem 0.6rem;
+    display: inline;
+}
+
+.productInfo {
+    margin: 3.75rem 1.875rem 0rem 6.25rem;
+}
+
+.dressType {
+    font-size: 1.5rem;
+}
+
+.productName {
+    width: 37rem;
+    height: 3.625rem;
+    text-align: left;
+    margin: 1.7rem 0rem 1rem 0rem;
+    font-size: 2.2rem;
+    font-weight: 500;
+}
+
+.description {
+    font-size: 1.2rem;
+    width: 42.625rem;
+    height: 3.688rem;
+}
+
+.quantity {
+    width: 6.125rem;
+    height: 1.813rem;
+    margin-top: 2rem;
+    font-size: 1.3rem;
+}
+
+.minus {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 0.063rem solid #eeeeee;
+    opacity: 1;
+    text-align: center;
+    margin: 2.375rem 0rem 0rem 1.25rem;
+    color: blue;
+}
+
+.minus:hover {
+    cursor: pointer;
+}
+
+.plus:hover {
+    cursor: pointer;
+}
+
+.count {
+    width: 0.563rem;
+    height: 1.813rem;
+    margin: 2rem 0rem 0rem 1.2rem;
+    font-size: 1.5rem;
+}
+
+.plus {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 0.063rem solid #eeeeee;
+    text-align: center;
+    margin: 2.3rem 0rem 0rem 1.2rem;
+    color: blue;
+}
+
+.couponcode {
+    width: 15rem;
+    height: 2rem;
+    text-align: left;
+    font-size: 1.3rem;
+    opacity: 1;
+    margin-top: 35px;
+}
+
+.coupon-code-box {
+    width: 10rem;
+    height: 2.8rem;
+    border-radius: 0px;
+    margin: 1.65rem 0rem 0rem 0rem;
+}
+
+.couponInput {
+    width: 173px;
+    height: 40px;
+    border: 2px solid #003c6d;
+    top: 763px;
+    margin-top: 10px;
+}
+
+.applybtn {
+    width: 5rem;
+    height: 2.8rem;
+    margin-top: 26px;
+    text-align: center;
+    border-radius: 0px;
+}
+
+.price {
+    font-size: xx-large;
+    font-weight: bold;
+    margin: 1rem 0rem 1rem 0rem;
+}
+
+.cartbtn {
+    width: 30rem;
+    height: 3rem;
+    border-radius: 0rem;
+    margin: 2rem 0rem 0rem 1rem;
+    font-size: 1.6rem;
+}
+
+hr {
+    margin: 4rem 22rem 0rem 6.5rem;
+    border: 0.1px solid black;
+}
+
+.totalpage {
+    margin-left: 4rem;
+}
+
+.recommendation {
+    margin: 3rem 0rem 0rem 6.4rem;
+    font-size: 1.5rem;
+}
+
+.emptybox {
+    width: 18rem;
+    height: 20rem;
+    background: #2a2a2a 0% 0% no-repeat padding-box;
+    margin: 3rem 0rem 1rem 6.4rem;
+}
+
+.key {
+    width: 2.75rem;
+    height: 1.813rem;
+    margin: 2rem 2rem 0rem 0rem;
+    font-size: 1.3rem;
+}
+
+.values {
+    width: 27px;
+    height: 27px;
+    margin: 33px 7px 0px 40px;
+}
