@@ -1,0 +1,55 @@
+<div class="configure-container">
+    <div class="configure-nav">
+        <a
+            class="nav-item"
+            routerLink="/admin/configure"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }"
+            ><i class="material-icons">settings_applications</i>Change Layout</a
+        >
+
+        <a
+            class="nav-item"
+            routerLink="customize"
+            routerLinkActive="active-link"
+            ><i class="material-icons">edit</i>Customize labels</a
+        >
+        <a
+            class="nav-item"
+            routerLink="color-palette"
+            routerLinkActive="active-link"
+            ><i class="material-icons">color_lens</i>Color and font palette</a
+        >
+
+        <a
+            class="nav-item"
+            routerLink="isv-templates"
+            routerLinkActive="active-link"
+            #rla="routerLinkActive"
+            ><i class="material-icons">label</i>ISV templates</a
+        >
+        <div class="child-configure-nav" [class.show]="rla.isActive">
+            <a
+                *ngFor="let path of isvTemplatePaths"
+                class="nav-item"
+                [routerLink]="['isv-templates']"
+                [queryParams]="{ path: path.url }"
+                routerLinkActive="active-link"
+                ><i class="material-icons">navigate_next</i>{{ path.label }}</a
+            >
+        </div>
+    </div>
+    <div
+        class="form-buttons"
+        *ngIf="!router.url.includes('/admin/configure/isv-templates')"
+    >
+        <button
+            type="submit"
+            class="btn btn-large reset-btn"
+            (click)="resetConfig()"
+        >
+            Reset config
+        </button>
+    </div>
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,36 @@
+<div class="form-container form-center">
+    <div class="form-heading">{{ heading.h1 }}</div>
+
+    <form [formGroup]="emailVerifyForm" (ngSubmit)="onContinue()">
+        <div class="input-field">
+            <mat-icon>mail</mat-icon>
+            <input class="pl-3" [type]="'text'" formControlName="email" />
+            <span
+                class="err-msg"
+                *ngIf="this.emailVerifyForm?.get('email')?.touched && this.emailVerifyForm?.get('email')?.errors?.['required']"
+            >
+                email {{ requiredErrMessage }}
+            </span>
+            <button
+                class="btn"
+                type="submit"
+                [disabled]="emailVerifyForm.invalid"
+            >
+                {{ button.btn1 }}
+            </button>
+        </div>
+    </form>
+
+    <div class="divider"></div>
+
+    <div class="input-field">
+        <div class="form-heading" [innerText]="heading.h2"></div>
+        <button class="btn btn-outline" type="submit" (click)="guestLogin()">
+            {{ button.btn2 }}
+        </button>
+
+        <p class="bottom-message" [innerText]="guestMessage"></p>
+    </div>
+
+    <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+</div>

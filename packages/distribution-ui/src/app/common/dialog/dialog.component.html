@@ -1,0 +1,35 @@
+<div *ngIf="show" class="overlay" [class.transparent-overlay]="isTransparent">
+    <div
+        [ngClass]="{
+            modal: true,
+            'delete-box-size': isDeleteModal,
+            discount: isDiscountModal
+        }"
+    >
+        <div class="modal-content">
+            <h4 *ngIf="!isTransparent">{{ header }}</h4>
+            <h5 *ngIf="isDeleteModal">
+                <mat-icon>info</mat-icon> {{ header }}
+            </h5>
+            <h4 *ngIf="!isTransparent">{{ subHeader }}</h4>
+            <h5 *ngIf="isDiscountModal">
+                {{ subHeader }}
+                <mat-icon class="btn-right-side" (click)="show = false"
+                    >clear</mat-icon
+                >
+            </h5>
+            <p
+                *ngIf="isTransparent && isDeleteModal"
+                class="delete-modal-sub-heading"
+                [ngClass]="{
+                    'delete-modal-sub-heading': isDeleteModal,
+                    'discount-sub-heading': isDiscountModal
+                }"
+            >
+                {{ subHeader }}
+            </p>
+            <p class="mb-1 mt-1">{{ content }}</p>
+        </div>
+        <ng-content></ng-content>
+    </div>
+</div>

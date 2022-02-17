@@ -1,0 +1,50 @@
+<div class="overlay" [class.transparent-overlay]="true">
+    <div class="modal">
+        <form class="modal-content" [formGroup]="consentForm">
+            <h5>{{ header }}</h5>
+            <label
+                *ngIf="
+                    consentTerm?.legalCategory !== hide &&
+                    consentValue?.[0]?.rule !== 'ASSENT_IMPLICIT'
+                "
+                [ngClass]="
+                    consentTerm.legalCategory === transparent
+                        ? 'transparent'
+                        : ''
+                "
+            >
+                <input
+                    class="filled-in"
+                    type="checkbox"
+                    [formControlName]="terms"
+                /><span [innerHtml]="consentTerm.description"></span>
+            </label>
+            <label
+                *ngIf="
+                    consentCommunication.legalCategory !== hide &&
+                    consentValue?.[1]?.rule !== 'ASSENT_IMPLICIT'
+                "
+                [ngClass]="
+                    consentCommunication.legalCategory === transparent
+                        ? 'transparent'
+                        : ''
+                "
+            >
+                <input
+                    class="filled-in"
+                    type="checkbox"
+                    [formControlName]="communication"
+                /><span [innerHtml]="consentCommunication.description"></span>
+            </label>
+
+            <button
+                color="primary"
+                class="btn"
+                [disabled]="btnDisable()"
+                (click)="onUpdateConsent()"
+            >
+                {{ buttonType.name }}
+            </button>
+        </form>
+    </div>
+</div>

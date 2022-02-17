@@ -1,0 +1,58 @@
+<div>
+    <div class="input-section">
+        <label class="label-heading">Edit images</label>
+        <div class="image-field">
+            <div class="preview-img">
+                <img [src]="logo.preview" />
+            </div>
+            <label for="logo" class="btn">{{
+                !logo.file ? 'Select logo' : 'Change logo'
+            }}</label>
+            <input
+                type="file"
+                accept="image/*"
+                id="logo"
+                (change)="onFileChange($event, 'logo')"
+            />
+            <button [disabled]="!logo.file" class="btn" (click)="uploadLogo()">
+                Upload logo
+            </button>
+        </div>
+        <div class="image-field">
+            <div class="preview-img">
+                <img [src]="hero.preview" />
+            </div>
+            <label for="hero" class="btn">{{
+                !hero.file ? 'Select hero image' : 'Change hero image'
+            }}</label>
+            <input
+                type="file"
+                accept="image/*"
+                id="hero"
+                (change)="onFileChange($event, 'hero')"
+            />
+            <button [disabled]="!hero.file" class="btn" (click)="uploadHero()">
+                Upload hero image
+            </button>
+        </div>
+        <div class="image-field" *ngFor="let tile of tiles; let i = index">
+            <div class="preview-img">
+                <img [src]="tile.preview" />
+            </div>
+            <label for="{{ getTileString(i) }}" class="btn">{{
+                !tile.file
+                    ? getTileString(i, 'Select')
+                    : getTileString(i, 'Change')
+            }}</label>
+            <input
+                type="file"
+                [id]="getTileString(i)"
+                accept="image/*"
+                (change)="onFileChange($event, null, i)"
+            />
+            <button [disabled]="!tile.file" class="btn" (click)="uploadtile(i)">
+                {{ getTileString(i, 'Upload') }}
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<div *ngIf="!!msg" [ngClass]="['notification-container', type]">
+    <span>
+        <i class="material-icons" *ngIf="type === checkError">info_outline</i>
+        <i class="material-icons" *ngIf="type === 'dob'">cake</i>{{ msg }}</span
+    >
+    <i class="material-icons close" (click)="close()">close</i>
+</div>

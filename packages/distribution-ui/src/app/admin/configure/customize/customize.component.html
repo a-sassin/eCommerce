@@ -1,0 +1,20 @@
+<div class="container">
+    <div>
+        <app-code-editor
+            [title]="'Other configurations'"
+            [code]="configParsed"
+            (CodeChange)="changeConfig($event)"
+        >
+        </app-code-editor>
+        <div class="flex">
+            <button
+                type="submit"
+                class="btn btn-large mr-2 reset-config"
+                (click)="saveConfig()"
+                [disabled]="invalidFile || !isConfigChanged()"
+            >
+                Save config
+            </button>
+        </div>
+    </div>
+</div>

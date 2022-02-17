@@ -1,0 +1,116 @@
+<nav>
+    <div class="upper-nav">
+        <div class="product-wrapper" [routerLink]="logoAndTitle.redirUrl">
+            <img
+                class="logo"
+                [src]="logoAndTitle.logoImgPath"
+                [alt]="logoAndTitle.titleText"
+            />
+            <a routerLink="">{{ logoAndTitle.titleText }}</a>
+        </div>
+        <div class="search-box">
+            <mat-icon>search</mat-icon>
+
+            <input class="input" type="text" placeholder="Search" />
+        </div>
+        <div class="nav-links">
+            <div class="options" *ngIf="!userData.isLoggedIn">
+                <span *ngFor="let option of options">
+                    <button
+                        [id]="option.id"
+                        *ngIf="option.icon !== 'shopping_cart'"
+                        [routerLink]="option.redirUrl ? option.redirUrl : ''"
+                        (click)="option.click ? loginRedirect() : ''"
+                        [ngStyle]="{
+                            color: option.color
+                        }"
+                    >
+                        {{ option.text }}
+                    </button>
+                    <button
+                        [id]="option.id"
+                        *ngIf="option.icon === 'shopping_cart'"
+                        [routerLink]="
+                            option.redirUrl && cartCount
+                                ? option.redirUrl
+                                : '/shopping-cart'
+                        "
+                        [ngStyle]="{
+                            color: option.color
+                        }"
+                    >
+                        <mat-icon
+                            matBadgePosition="above after"
+                            matBadgeSize="medium"
+                            matBadgeColor="warn"
+                            matBadge="{{ cartCount ? cartCount : '' }}"
+                            >shopping_cart</mat-icon
+                        >
+                    </button>
+                </span>
+            </div>
+            <div class="profile-links" *ngIf="userData.isLoggedIn">
+                <div class="nav-partition"></div>
+                <span *ngFor="let icon of optionsAfterLogin">
+                    <div
+                        class="profile-icon"
+                        routerLink="/account-manage"
+                        *ngIf="
+                            icon.icon === 'account_circle';
+                            else shoppingCart
+                        "
+                    >
+                        <span class="user-name">{{ userData.name }}</span>
+                        <mat-icon>{{ icon.icon }}</mat-icon>
+                    </div>
+
+                    <ng-template #shoppingCart>
+                        <div class="nav-partition"></div>
+                        <button
+                            [id]="icon.id"
+                            [routerLink]="
+                                icon.redirUrl && cartCount
+                                    ? icon.redirUrl
+                                    : '/shopping-cart'
+                            "
+                        >
+                            <mat-icon
+                                matBadgePosition="above after"
+                                matBadgeSize="medium"
+                                matBadgeColor="warn"
+                                matBadge="{{ cartCount ? cartCount : '' }}"
+                                *ngIf="
+                                    icon.icon === 'shopping_cart';
+                                    else cartIcon
+                                "
+                                >{{ icon.icon }}</mat-icon
+                            >
+                        </button></ng-template
+                    >
+                    <ng-template #cartIcon>
+                        <mat-icon
+                            *ngIf="
+                                icon.icon !== 'shopping_cart' ||
+                                icon.icon !== 'shopping_cart'
+                            "
+                            ><a href="">{{ icon.icon }}</a></mat-icon
+                        ></ng-template
+                    >
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="lower-nav">
+        <span *ngFor="let option of dropDowns">
+            {{ option.text }}
+            <mat-icon>arrow_drop_down</mat-icon>
+        </span>
+        <div class="mat-menu-items">
+            <mat-menu #menu="matMenu" xPosition="before">
+                <button mat-menu-item *ngFor="let item of dropDownItems">
+                    {{ item.text }}
+                </button>
+            </mat-menu>
+        </div>
+    </div>
+</nav>

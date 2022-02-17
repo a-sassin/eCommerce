@@ -1,0 +1,52 @@
+<div
+    class="test-section"
+    [ngClass]="{
+        success: testResults.testAttrubuteResult?.success === true,
+        error: testResults.testAttrubuteResult?.success === false
+    }"
+>
+    <h3>Attributes</h3>
+    <div>
+        <!-- <button class="btn" (click)="testAttributes()">
+            Test attributes
+        </button> -->
+        <p
+            *ngIf="testResults.testAttrubuteResult"
+            [ngClass]="[
+                testResults.testAttrubuteResult?.success ? 'success' : 'error'
+            ]"
+        >
+            {{ testResults.testAttrubuteResult.message }}
+        </p>
+        <div *ngIf="loadingState.testAttrubuteResult" class="progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+    <div>
+        <button
+            class="btn"
+            [disabled]="
+                !testResults.testAttrubuteResult?.data ||
+                !!testResults.testAttrubuteResult?.success
+            "
+            (click)="createAttributes()"
+        >
+            Create missing attributes
+        </button>
+        <p
+            *ngIf="testResults.createAttrubuteResult"
+            [ngClass]="[
+                testResults.createAttrubuteResult?.success ? 'success' : 'error'
+            ]"
+        >
+            {{ testResults.createAttrubuteResult.message }}
+        </p>
+        <div *ngIf="loadingState.createAttrubuteResult" class="progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+    <p class="form-note">
+        Note - To add an attribute for this application, add it in the
+        ATTRIBUTES enum present in the <q>setup.service.ts</q> file.
+    </p>
+</div>

@@ -1,0 +1,66 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+<div *ngIf="!loading">
+    <div
+        class="landing-image"
+        [ngStyle]="{ 'background-image': 'url(' + imagePath + ')' }"
+    ></div>
+    <hr />
+
+    <div class="trending">{{ trendingMessage }}</div>
+
+    <div class="filter">{{ filterMessage }}</div>
+    <div class="allBoxes">
+        <div *ngFor="let product of products">
+            <div
+                class="oneProduct"
+                (mouseover)="product.onHover = true"
+                (mouseout)="product.onHover = false"
+                (click)="showDetailPage(product)"
+            >
+                <div
+                    class="boy1"
+                    [ngStyle]="{
+                        'background-image':
+                            'url(' + baseUrl + product.productImageUrl + ')'
+                    }"
+                ></div>
+                <div class="content">
+                    <div class="left">
+                        {{ product.productTitle }}
+                        <div class="price1">
+                            {{ product.newPrice }}
+                            <span class="price2">{{ product.oldPrice }}</span>
+                        </div>
+                    </div>
+
+                    <!-- <div class="right">
+                        <button class="cartbtn">Add to cart</button>
+                        <div class="quantityBox">
+                            <span style="margin-left:10px">-</span>
+                            <span style="margin-left:30px">1</span>
+                            <span style="margin-left:22px">+</span>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="endBox"></div>
+</div>
+<app-dialog
+    [subHeader]="subHeader"
+    [content]="disDiacontent"
+    [show]="isShowDiscountDialog"
+    [isTransparent]="true"
+    [isDiscountModal]="true"
+>
+    <div class="flex delete-modal btn-right-side">
+        <button class="btn cancel mr-2" (click)="isShowDiscountDialog = false">
+            Remind me later
+        </button>
+        <button class="btn" (click)="onUpdateDOB()">
+            Update now
+        </button>
+    </div>
+</app-dialog>

@@ -1,0 +1,444 @@
+<div class="collection setup-instructions-container">
+    <section>
+        <a
+            class="headline"
+            href="/admin/setup-instructions#onboarding"
+            id="onboarding"
+            >Onboard an application in ISV.</a
+        >
+        <p>
+            1. Get an ISV tenant URL.
+            <span *ngIf="tenantUrl"
+                >Right now your configred tenant URL is -
+                <a [href]="tenantUrl" target="blank">{{ tenantUrl }}</a
+                >.</span
+            >
+            <span *ngIf="!tenantUrl"
+                >Right now you do not have any tenant url configured.</span
+            >
+        </p>
+        <p>
+            2. Make sure you have Admin access as well as all the required
+            tenant level subscriptions.
+        </p>
+        <p>
+            3. Navigate to
+            <a [href]="tenantUrl + '/ui/admin/applications'" target="blank"
+                >applications</a
+            >
+            screen in ISV admin console
+        </p>
+        <p>
+            4. Click on the <q>Add application</q> button and select
+            <q>Custom application</q> template.
+        </p>
+        <p>
+            <a
+                class="not-link"
+                href="/admin/setup-instructions#generalTab"
+                id="generalTab"
+            >
+                5. In the general tab provide a name to your application,
+                provide the same name in the <q>ISV APP NAME</q> field present
+                in the setup form.
+                <br />
+                Select the theme you have registered for this client
+                application.
+                <span *ngIf="themeId"
+                    >Right now your themeId is - <code>{{ themeId }}</code
+                    >.</span
+                >
+                <span *ngIf="!themeId"
+                    >Right now you haven't setup any theme yet.</span
+                >
+                (Please read the instruction section for
+                <a href="/admin/setup-instructions#theme">setting up a theme</a>
+                for ISV pages.)
+            </a>
+        </p>
+        <p>
+            <a
+                class="not-link"
+                href="/admin/setup-instructions#ssoTab"
+                id="ssoTab"
+            >
+                6. In the SSO tab fill the following fields -
+            </a>
+        </p>
+        <pre><code>
+  1. Sign-on method : Open ID connect 1.0,
+  2. Application URL : {{applicationUrl}},
+  3. Grant types : Authorization code, ROPC,
+  4. Redirect URIs : {{tenantConfig.OIDC_REDIRECT_URI}},
+  5. Require proof key for code exchange (PKCE) verification : false (uncheck),
+  6. Send all known user attributes in the ID token : true,
+  7. Allow all identity providers that are enabled for end users (3 providers) : true,
+     (The above will depend on choice, for distribution workflow select specific identity providers)
+  8. Set the access policy to control how users can access the application : select a <a href="/admin/setup-instructions#mfaPolicy">MFA policy</a>,
+  9. User consent : Do not ask for consent,
+  10.Restrict custom scope : false,
+  11.Restrict API access : false
+    </code></pre>
+        <a
+            class="not-link"
+            href="/admin/setup-instructions#addApiClient"
+            id="addApiClient"
+        >
+            7. In the API access tab, create an API client by clicking on the
+            <q>Add API client</q> button, give a name to the API client and
+            select the APIs to which you want to grant access.
+        </a>
+        <p>
+            8. In the Privacy tab, add all the consents which you have created
+            in the
+            <a href="/admin/setup-instructions#consents">create consent step</a
+            >.
+        </p>
+        <p>
+            9. Save the application. You should get the following data from the
+            SSO and API access tabs respectively.
+        </p>
+        <pre><code>
+  Client ID : Copy it and add it in place of <q>OIDC CLIENT ID</q> in the setup form,
+  Client secret : Copy it and add it in place of <q>OIDC CLIENT Secret</q> in the setup form
+    </code></pre>
+        <p>
+            10. Navigate to the API access tab and click on the edit icon of the
+            API client which we created in
+            <a href="/admin/setup-instructions#addApiClient">this step</a>. Copy
+            and note down the client ID and client secret.<br />
+            Also copy the <code>application_id</code> which you will get from
+            URL like this example -
+            <code
+                >https://[tenant-name]/ui/admin/application/[application_id]</code
+            >
+        </p>
+        <pre><code>
+  Client ID : Copy it and add it in place of <q>API CLIENT ID</q> in the setup form,
+  Client secret : Copy it and add it in place of <q>API CLIENT SECRET</q> in the setup form
+  Application ID from the URL : Copy it and add it in place of <q>ISV APP ID</q> in the setup form.
+    </code></pre>
+    </section>
+
+    <section>
+        <a
+            class="headline"
+            href="/admin/setup-instructions#whitelist"
+            id="whitelist"
+            >Whitelist site URL in ISV to avoid cors</a
+        >
+        <p>
+            1. ISV services will throw
+            <a
+                href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS"
+                target="_blank"
+                >CORS</a
+            >
+            errors for the ISV API calls if we do not whitelist the client
+            application URLs which are requesting resources from ISV. In order
+            to whitelist our client URLs, navigate to the
+            <a
+                [href]="
+                    tenantUrl +
+                    '/ui/admin/security/api-access?tab=allowed-domains'
+                "
+                target="blank"
+                >allowed-domain</a
+            >
+            page in ISV and add the client application domains. Currently we are
+            using following domains/URLs for the current application which needs
+            to be whitelisted -
+        </p>
+        <pre><code>
+  Application front end URL : {{applicationUrl}}
+  Application backend URL : {{backendUrl}}
+    </code></pre>
+        <p>
+            2. Alternatively you can use a regular expression pattern as well
+            using the same user interface. To apply a regular expression, tick
+            the regular expression checkbox while adding a domain and provide a
+            proper regular expression in the input box.
+        </p>
+    </section>
+
+    <section>
+        <a class="headline" href="/admin/setup-instructions#theme" id="theme"
+            >Setup a theme for ISV pages</a
+        >
+        <p class="form-note">
+            Note: These are the manual steps to register a theme for ISV pages,
+            you can use
+            <a routerLink="../run-setup">this</a>
+            existing admin interface to apply theme on the ISV pages connected
+            to this application.
+        </p>
+        <p>
+            1. In the backend repository of this client application, you will
+            find a zip file at following path -
+            <code>/distribution/assets/config/templates_isv_theme.zip</code>
+            <br />
+            Upload this zip file to register an ISV theme. in order to make the
+            user experience consistent throughout the application.
+            <br />
+            Use
+            <a
+                href="https://docs.verify.ibm.com/verify/reference/registerthemetemplates"
+                target="blank"
+                >these theme related APIs</a
+            >
+            to
+            <a
+                href="https://docs.verify.ibm.com/verify/reference/registerthemetemplates"
+                target="blank"
+                >create</a
+            >,
+            <a
+                href="https://docs.verify.ibm.com/verify/reference/updatethemetemplates"
+                target="blank"
+                >update</a
+            >
+            and
+            <a
+                href="https://docs.verify.ibm.com/verify/reference/getthemeregistrations"
+                target="blank"
+                >get</a
+            >
+            ISV theme.
+        </p>
+        <p>
+            2. If you are registering the ISV theme first time, you will receive
+            an id of that theme in the API response (use this
+            <a
+                href="https://docs.verify.ibm.com/verify/reference/getthemeregistrations"
+                target="blank"
+                >get</a
+            >
+            call to find out the id). Add this theme ID
+            <a routerLink="/admin/tenant-config" target="_blank">setup form</a>
+            as well as in the
+            <a href="/admin/setup-instructions#generalTab">general tab</a>
+            during application onboarding in the ISV.
+        </p>
+    </section>
+
+    <section>
+        <a
+            class="headline"
+            href="/admin/setup-instructions#attributes"
+            id="attributes"
+            >Create required attributes</a
+        >
+        <p class="form-note">
+            Note: These are the manual steps to create required attributes, you
+            can use
+            <a routerLink="../run-setup">this</a>
+            existing admin interface to create the required attributes for this
+            application.
+        </p>
+        <p>
+            <a
+                class="not-link"
+                href="/admin/setup-instructions#attributeIds"
+                id="attributeIds"
+                >1. Additional attributes are needed to perform the native
+                application tasks present in the client application. We will
+                need to create attributes with following ids for this
+                application -
+            </a>
+        </p>
+        <pre>
+  <code>
+{{getAttributes()}}
+  </code>
+</pre>
+        <p>
+            2. To create attributes, navigate to the
+            <a
+                [href]="tenantUrl + '/ui/admin/directory/attributes'"
+                target="blank"
+                >attributes</a
+            >
+            page in ISV admin console.
+        </p>
+        <p>
+            3. Click on the <q>Add attribute button</q> to create an attribute.
+        </p>
+        <p>
+            4. In the <q>Type and availabilty</q> step, select type as
+            <q>Custom attribute</q> and select both the purposes
+            <q>Provisioning</q> and <q>Single sign-on</q>.
+        </p>
+        <p>
+            5. In the <q>Name and description</q> step, give a relevant name to
+            the attribute.
+        </p>
+        <p>
+            6. In the <q>Source and value</q> step, provide any attributeId from
+            the attribute ID list given in
+            <a href="/admin/setup-instructions#attributeIds">step 1</a>.
+            <br />Also select a relevant <q>data type</q>, for eg. if the
+            attribute value is going to be string or boolean type, then select
+            the corresponding type from the <q>Data type</q> dropdown.
+        </p>
+        <p>
+            7. The constraint step is used to modify the attribute constraints,
+            use it as per need and save the attribute configuration.
+        </p>
+    </section>
+
+    <section>
+        <a
+            class="headline"
+            href="/admin/setup-instructions#consents"
+            id="consents"
+            >Create consents</a
+        >
+        <p>
+            <a
+                class="not-link"
+                href="/admin/setup-instructions#consentsIds"
+                id="consentsIds"
+                >1. Various consents will be displayed to the end users while
+                dealing with their data. We will need to data purposes with the
+                following purpose IDs in ISV -
+            </a>
+        </p>
+        <pre>
+      <code>
+{{requiredPurposeIds | json}}
+</code>
+    </pre>
+        <p>
+            2. To create a consent, navigate to the
+            <a [href]="tenantUrl + '/ui/admin/privacy/purposes'" target="blank"
+                >Data purposes</a
+            >
+            and click on the <q>Create purpose</q> button.
+        </p>
+        <p>
+            3. In the <q>General settings</q> section, give a relevant name to
+            the purpose for and enter any value from the purpose IDs list
+            present in the
+            <a
+                class="not-link"
+                href="/admin/setup-instructions#consentsIds"
+                id="consentsIds"
+                >step 1</a
+            >
+        </p>
+        <p>
+            4. In the <q>Default and custom settings</q> section we will have to
+            create or select the access types which we will need in the next
+            step. Each purpose may need different access types, those are listed
+            in the next step.<br />
+            Make sure that you provide accessType id as well while creating an
+            accessType. The accessType ids can be same as listed in step 5.
+        </p>
+        <p>
+            5. In the <q>Attributes</q> section add different attributes for
+            different purposes with specific accessTypes as given bellow -
+        </p>
+        <pre *ngFor="let p of requiredPurposeIds">
+            <b>{{p}}</b>
+      <code>
+
+{{requiredPurposes[p] | json}}
+
+  <!-- creditCardConsentAgencies:
+      attributeId: creditCardNumber,
+          accessType: share (create/select this access type in the previous step)
+      attributeId: creditCardExpiration,
+          accessType: share (create/select this access type in the previous step)<br/>
+  creditCardConsentDMV:
+      attributeId: creditCardNumber,
+          accessType: store (create/select this access type in the previous step)
+      attributeId: creditCardExpiration,
+          accessType: store (create/select this access type in the previous step)<br/>
+  mfaMobileNumber:
+      attributeId: mobile_number,
+          accessType: read (create/select this access type in the previous step) -->
+      </code>
+    </pre>
+
+        <p>
+            6. Create terms EULA by navigating to
+            <a [href]="tenantUrl + '/ui/admin/privacy/eulas'" target="blank"
+                >terms</a
+            >
+            page.
+        </p>
+        <p>
+            7. The EULA name and EULA ID should be - <code>terms</code>. Provide
+            the basic details and following Terms of use URI -
+            {{ backendUrl }}/terms.html
+        </p>
+    </section>
+
+    <section>
+        <a
+            class="headline"
+            href="/admin/setup-instructions#mfaPolicy"
+            id="mfaPolicy"
+            >Create MFA policy</a
+        >
+        <p>
+            1. First of as per the requirement of the client application we
+            might need to modify the default setting for
+            <a
+                [href]="
+                    tenantUrl +
+                    '/ui/admin/authentication/authentication-factors'
+                "
+                target="blank"
+                >authentication factors</a
+            >.<br />
+            In order to allow the end user to use his/her default email ID for
+            MFA which he/her registered during sign up process, we will have to
+            enable the option
+            <q>User profile attributes and enrolled methods</q> present in the
+            <q>Allow second factors from the following sources</q>
+        </p>
+        <p>
+            2. To create the MFA policy for end user, navigate to the
+            <a
+                [href]="
+                    tenantUrl +
+                    '/ui/admin/authentication/authentication-factors'
+                "
+                target="blank"
+                >Access policies</a
+            >
+            section in ISV admin console, and click on the
+            <q>Add policy</q> button.
+        </p>
+        <p>
+            3. Provide the general details and while selecting the
+            <q>Policy type</q>, select <q>Federated sign-on policy</q>.
+        </p>
+        <p>
+            4. Enable adaptive access if required, and select the actions to be
+            taken for different types of risks.
+        </p>
+        <p>
+            5. In the <q>Policy rules</q> step we will have to create rules as
+            per our requirement. We will be using the enableMFA attribute to
+            provide support for enabling and disabling the MFA to the end user.
+        </p>
+        <p>
+            6. Click on the <q>Add rule</q> button and give a name to your rule.
+            While providing the conditions for rule please refer following
+            information -
+        </p>
+        <pre>
+      <code>
+  if [User attributes] is [Enable MFA] and [is one of] [true]
+  then [MFA per session]
+  with [Any available method(default)]
+      </code>
+    </pre>
+        <p>
+            8. Save this policy and add it in the application as given in the
+            <a href="/admin/setup-instructions#ssoTab">first section</a>.
+        </p>
+    </section>
+</div>

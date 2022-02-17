@@ -1,0 +1,73 @@
+<div
+    class="test-section"
+    [ngClass]="{
+        success: testResults.testResult?.success === true,
+        error: testResults.testResult?.success === false
+    }"
+>
+    <h3>ISV theme</h3>
+    <p *ngIf="themeID">theme ID -> {{ themeID }}</p>
+    <div>
+        <p
+            *ngIf="testResults.testResult"
+            [ngClass]="[testResults.testResult?.success ? 'success' : 'error']"
+        >
+            {{ testResults.testResult.message }}
+        </p>
+        <div *ngIf="loadingState.testResult" class="progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+    <div class="input-section">
+        <div *ngIf="!themeID" class="input-field">
+            <label>Enter theme name</label>
+            <input [(ngModel)]="themeName" type="text" />
+        </div>
+        <p *ngIf="!!selectedTheme">file name - {{ selectedTheme.name }}</p>
+        <p>
+            The default zip file to upload is present at following location ->
+            /public/assets/config/templates_isv_theme.zip.
+        </p>
+        <div class="image-field">
+            <label for="theme" class="btn">{{
+                !selectedTheme ? 'Upload zip file' : 'Change zip file'
+            }}</label>
+            <input
+                type="file"
+                accept=".zip,.rar,.7zip"
+                id="theme"
+                (change)="onFileChange($event)"
+            />
+            <button
+                [disabled]="!selectedTheme"
+                class="btn"
+                (click)="uploadTheme()"
+            >
+                {{ !themeID ? 'Register' : 'Update' }} theme
+            </button>
+        </div>
+        <p
+            *ngIf="testResults.createResult"
+            [ngClass]="[
+                testResults.createResult?.success ? 'success' : 'error'
+            ]"
+        >
+            {{ testResults.createResult.message }}
+        </p>
+        <div *ngIf="loadingState.createResult" class="progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+    <p class="form-note">
+        Note - You can use this interface to update the existing theme as well.
+        However if you are already using any theme, make sure you download that
+        theme and replace it at location
+        <code>/public/assets/config/templates_isv_theme.zip</code>, otherwise
+        updating the default theme will reset the theme to its orignal state and
+        will revert the additional configuration which you might have applied
+        through the
+        <a routerLink="/admin/configure/isv-templates" target="_blank"
+            >ISV template configuration UI</a
+        >.
+    </p>
+</div>

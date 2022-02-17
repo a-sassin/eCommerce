@@ -1,0 +1,14 @@
+<div>
+    <div *ngIf="title" class="header-section">
+        {{ title }}
+    </div>
+    <textarea
+        [ngStyle]="{
+            color: invalidFile ? 'red' : ''
+        }"
+        class="code-editor"
+        [value]="codeStream || 'Labels are loading.....'"
+        (keyup)="change($event)"
+    >
+    </textarea>
+</div>

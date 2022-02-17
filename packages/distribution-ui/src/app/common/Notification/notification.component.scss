@@ -1,0 +1,58 @@
+.notification-container {
+    max-width: 32rem;
+    padding: 0.75rem 3rem 0.75rem 1rem;
+    position: fixed;
+    top: 13%;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    background-color: #24a148;
+    color: #ffffff;
+    font-size: 1rem;
+    border-radius: 4px;
+    z-index: 111;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: auto;
+    word-break: break-all;
+    i {
+        color: #fff;
+        margin-right: 0.5rem;
+    }
+    &.error {
+        background-color: #e15c5c;
+    }
+    &.info {
+        background-color: #067fdb;
+    }
+    &.warning {
+        background-color: #f1c21b;
+    }
+    &.dob {
+        background-color: black;
+        max-width: 100%;
+        border-radius: 0px;
+
+        span {
+            i {
+                color: red;
+                position: relative;
+                top: 2px;
+            }
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            left: 35%;
+        }
+    }
+
+    .close {
+        cursor: pointer;
+        font-size: 1.75rem;
+        margin-left: 0.25rem;
+        position: absolute;
+        right: 0.5rem;
+    }
+}

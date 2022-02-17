@@ -1,0 +1,127 @@
+:host {
+    .container {
+        width: 100%;
+        min-height: 90%;
+        height: auto;
+        display: flex;
+    }
+    .form-container {
+        border: none;
+        padding: 0;
+        form {
+            max-width: 100%;
+        }
+    }
+    .col1 {
+        width: 50%;
+        margin: 0.8rem 5rem 0 8rem;
+    }
+    .input-field {
+        display: flex;
+        flex-wrap: wrap;
+        > div {
+            min-width: 45%;
+            margin: 0 1rem 0.5rem 0;
+        }
+    }
+    .input-address {
+        width: 51.4rem !important;
+        background-size: 4.5%;
+    }
+    .col2 {
+        width: 400px;
+        margin: 2rem auto;
+        height: 440px;
+        padding: 50px;
+        background-color: #f2f2f2;
+        div {
+            margin-top: 20px;
+        }
+        .your-orders {
+            margin-top: 0px;
+            border-bottom: 2px solid gray;
+            padding-bottom: 10px;
+        }
+        .end-content {
+            float: right;
+        }
+        .main-content {
+            margin-top: 0px;
+            display: flex;
+            flex-direction: row;
+            .img,
+            .details {
+                height: 90px;
+                width: 30%;
+            }
+            .details {
+                width: 80%;
+                margin-left: 10px;
+                .product-name {
+                    color: #003c6d;
+                }
+                .size {
+                    margin-left: 10px;
+                    margin-right: 20px;
+                    font-size: medium;
+                    color: black;
+                    font-weight: bold;
+                }
+                .color {
+                    padding: 0px 10px;
+                    background-color: black;
+                    margin-left: 10px;
+                }
+            }
+        }
+        .total-price {
+            .right-text {
+                position: relative;
+                float: right;
+            }
+            padding: 15px;
+            border: 1px solid black;
+        }
+        .right-text {
+            margin-left: 130px;
+        }
+        .proceedBtn:hover {
+            cursor: default;
+        }
+        .btn-bottom {
+            display: flex;
+            justify-content: flex-end;
+            button {
+                width: 10rem;
+                height: 3rem;
+                margin: 1rem 2rem 0.8rem 0;
+                font-size: 1.6rem;
+                border-radius: 0;
+                font-weight: 200;
+            }
+        }
+    }
+    .main-label {
+        font-size: 1.2rem;
+        font-weight: 600;
+        padding: 0.8rem 0;
+    }
+
+    .divider {
+        border-bottom: 2px solid #00295e;
+        margin: 2rem auto;
+    }
+
+    .consent-font {
+        font-size: 1rem;
+        font-weight: 400;
+    }
+    .btn-pay {
+        font-size: 1.9rem;
+        font-weight: 100;
+        width: 10.2rem;
+        float: right;
+        height: 4rem;
+        border-radius: 0;
+    }
+}

@@ -1,0 +1,10 @@
+<app-code-editor
+    [title]="'ISV labels'"
+    [code]="code"
+    (CodeChange)="onLablesChange($event)"
+    [path]="path"
+></app-code-editor>
+
+<button class="btn btn-large" (click)="saveLabels()">
+    Save
+</button>

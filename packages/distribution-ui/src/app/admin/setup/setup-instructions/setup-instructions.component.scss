@@ -1,0 +1,43 @@
+.setup-instructions-container {
+    p,
+    a {
+        font-size: 17px;
+        color: #515151;
+    }
+    a:not(.not-link) {
+        border-bottom: 1px solid;
+        &:hover {
+            color: blue;
+        }
+    }
+    a.not-link {
+        border-bottom: none;
+        cursor: text;
+        &:hover {
+            &:hover {
+                color: inherit;
+            }
+        }
+    }
+    section {
+        border-bottom: 1px solid #e0e0e0;
+        padding: 2rem;
+        a.headline {
+            font-size: 1.5rem;
+            display: block;
+        }
+    }
+}
+
+pre {
+    font-size: 12px;
+    border: 1px solid #e0dfe0;
+    overflow: auto;
+}
+
+.highlight,
+a:focus-visible {
+    background-color: yellow;
+    border: none !important;
+    outline: none !important;
+}

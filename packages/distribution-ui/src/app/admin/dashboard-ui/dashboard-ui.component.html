@@ -1,0 +1,36 @@
+<div class="admin-container">
+    <nav>
+        <div class="nav-links">
+            <div class="options">
+                <button
+                    [value]="option.name"
+                    [id]="option.name"
+                    *ngFor="let option of headerOptionsBtn"
+                    [routerLink]="option.url"
+                    routerLinkActive="active-link"
+                >
+                    {{ option.text }}
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!--     <div class="configure-container">
+        <div class="configure-nav">
+            <a
+                class="nav-item"
+                routerLink="/admin"
+                routerLinkActive="active-link"
+                ><i class="material-icons">settings_applications</i>ISV
+                integration</a
+            >
+            <a
+                class="nav-item"
+                routerLink="/admin/user-identities"
+                routerLinkActive="active-link"
+                ><i class="material-icons">verified_user</i>User Identities</a
+            >
+        </div> -->
+    <router-outlet></router-outlet>
+    <!-- </div> -->
+</div>

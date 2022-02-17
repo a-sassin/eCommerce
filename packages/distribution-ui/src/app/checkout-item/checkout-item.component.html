@@ -1,0 +1,226 @@
+<div class="container">
+    <div class="col1 form-container">
+        <form
+            [formGroup]="checkoutItemForm"
+            (ngSubmit)="onCheckoutFormSubmit()"
+        >
+            <span class="main-label">{{ formlist1.heading }}</span>
+            <div class="input-field">
+                <div *ngFor="let field of formlist1.list">
+                    <label class="label" for="{{ field.label }}">{{
+                        field.label
+                    }}</label>
+                    <input
+                        class="input"
+                        [formControlName]="field.fieldName"
+                        placeholder="{{ field.placeholder }}"
+                        id="{{ field.label }}"
+                        [type]="field.type || 'text'"
+                    />
+                    <div
+                        class="err-msg"
+                        *ngIf="this.checkoutItemForm?.get(field.fieldName)?.touched && this.checkoutItemForm?.get(field.fieldName)?.errors?.['required']"
+                    >
+                        {{ field.label }} {{ requiredErrMessage }}
+                    </div>
+                    <div
+                        class="err-msg"
+                        *ngIf="this.checkoutItemForm?.get(field.fieldName)?.touched && this.checkoutItemForm?.get(field.fieldName)?.errors?.['email'] && field.fieldName === 'emailAddress'"
+                    >
+                        Please enter valid email address
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <span class="main-label">{{ formlist2.heading }}</span>
+            <div class="input-field">
+                <div *ngFor="let field of formlist2.list">
+                    <label class="label" for="{{ field.label }}">{{
+                        field.label
+                    }}</label>
+                    <input
+                        [formControlName]="field.fieldName"
+                        placeholder="{{ field.placeholder }}"
+                        [ngClass]="{
+                            'input-address': field.fieldName === 'address'
+                        }"
+                        id="{{ field.label }}"
+                        [type]="field.type || 'text'"
+                    />
+                    <div
+                        class="err-msg"
+                        *ngIf="this.checkoutItemForm?.get(field.fieldName)?.touched && this.checkoutItemForm?.get(field.fieldName)?.errors?.['required']"
+                    >
+                        {{ field.label }} {{ requiredErrMessage }}
+                    </div>
+
+                    <div
+                        class="err-msg"
+                        *ngIf="this.checkoutItemForm?.get(field.fieldName)?.touched && this.checkoutItemForm?.get(field.fieldName)?.errors?.['pattern'] && field.fieldName === 'postNumber'"
+                    >
+                        Please enter valid post number (0-9 digits only)
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <span class="main-label">{{ formlist3.heading }}</span>
+            <div class="input-field">
+                <div *ngFor="let field of formlist3.list">
+                    <label class="label" for="{{ field.label }}">{{
+                        field.label
+                    }}</label>
+                    <input
+                        *ngIf="
+                            field.type !== 'select' &&
+                            field.fieldName !== 'cardNumber' &&
+                            field.fieldName !== 'securityCode'
+                        "
+                        [formControlName]="field.fieldName"
+                        placeholder="{{ field.placeholder }}"
+                        id="{{ field.label }}"
+                        [type]="field.type || 'text'"
+                    />
+                    <input
+                        *ngIf="field.fieldName === 'cardNumber'"
+                        [formControlName]="field.fieldName"
+                        placeholder="{{ field.placeholder }}"
+                        id="{{ field.label }}"
+                        [type]="field.type || 'text'"
+                        appMask
+                        maskName="credit-card"
+                    />
+                    <input
+                        *ngIf="field.fieldName === 'securityCode'"
+                        [formControlName]="field.fieldName"
+                        placeholder="{{ field.placeholder }}"
+                        id="{{ field.label }}"
+                        [type]="field.type || 'text'"
+                        appMask
+                        maskName="security-code"
+                    />
+                    <select
+                        *ngIf="field.type === 'select'"
+                        [formControlName]="field.fieldName"
+                    >
+                        <option selected disabled value="">{{
+                            field.placeholder
+                        }}</option>
+                        <option
+                            *ngFor="let card of cardOptions"
+                            [value]="card"
+                            [selected]="
+                                checkoutItemForm.get('paymentType').value ===
+                                card
+                            "
+                            >{{ card }}</option
+                        >
+                    </select>
+
+                    <div
+                        class="err-msg"
+                        *ngIf="this.checkoutItemForm?.get(field.fieldName)?.touched && this.checkoutItemForm?.get(field.fieldName)?.errors?.['required']"
+                    >
+                        {{ field.label }} {{ requiredErrMessage }}
+                    </div>
+                    <div
+                        class="err-msg"
+                        *ngIf="this.checkoutItemForm?.get(field.fieldName)?.touched && this.checkoutItemForm?.get(field.fieldName)?.errors?.['minLength'] && field.fieldName === 'cardNumber'"
+                    >
+                        Please enter valid credit card number of 16 digits.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-2">
+                <ng-container *ngFor="let option of consentData">
+                    <label
+                        *ngIf="
+                            option.legalCategory !== hide ||
+                            option.rule !== 'ASSENT_IMPLICIT'
+                        "
+                        [ngClass]="
+                            option.legalCategory === transparent
+                                ? 'transparent'
+                                : ''
+                        "
+                    >
+                        <input
+                            class="filled-in"
+                            type="checkbox"
+                            [formControlName]="option.purposeId"
+                        /><span class="consent-font"
+                            >{{ option.description }}
+                        </span>
+                    </label>
+                </ng-container>
+            </div>
+
+            <div
+                class="form-note social-providers-container mt-2 mb-2"
+                *ngIf="!isUserLogin()"
+            >
+                Guests don't qualify for the reward points,
+                <a routerLink="/signup">click here </a>to create your account
+            </div>
+
+            <button
+                class="btn btn-pay"
+                [type]="btn.type"
+                [disabled]="checkoutItemForm.invalid"
+            >
+                {{ btn.text }}{{ productDetails?.totalPrice }}
+            </button>
+        </form>
+    </div>
+    <div class="col2">
+        <div class="your-orders">
+            <span>Your Orders</span>
+            <span class="end-content">1</span>
+        </div>
+        <div class="main-content">
+            <div class="img">
+                <img
+                    [src]="baseUrl + productDetails?.productImageUrl"
+                    alt="item-image"
+                />
+            </div>
+            <div class="details">
+                <p class="product-name">{{ productDetails?.productTitle }}</p>
+                <span
+                    *ngFor="
+                        let property of productDetails?.properties | keyvalue
+                    "
+                >
+                    <span>{{ property.key }}</span>
+                    <span class="size">{{ property.value[0] }}</span>
+                </span>
+                <p>{{ productDetails?.newPrice }}x1</p>
+            </div>
+        </div>
+        <div>
+            <span>Actual Price</span>
+            <span class="end-content">{{ productDetails?.newPrice }}</span>
+        </div>
+        <div>
+            <span>Product Tax</span>
+            <span class="end-content">$6</span>
+        </div>
+        <div>
+            <span>Shipping Charge</span>
+            <span class="end-content">$0</span>
+        </div>
+        <div class="total-price">
+            <span>Total price</span>
+            <span class="right-text">${{ productDetails?.totalPrice }}</span>
+        </div>
+    </div>
+</div>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<app-loading-spinner
+    [loadingText]="loadingText"
+    *ngIf="loading && isCheckoutClicked"
+></app-loading-spinner>

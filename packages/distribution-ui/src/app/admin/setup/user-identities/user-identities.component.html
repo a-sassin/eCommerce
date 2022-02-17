@@ -1,0 +1,13 @@
+<div class="editor-container">
+    <app-code-editor
+        [code]="data"
+        (CodeChange)="onChange($event)"
+    ></app-code-editor>
+</div>
+<button
+    class="btn btn-large"
+    (click)="saveUsers()"
+    [disabled]="isConfigChanged()"
+>
+    Save
+</button>

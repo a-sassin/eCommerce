@@ -1,0 +1,71 @@
+<div class="form-container page-view">
+    <form [formGroup]="tenantConfigureForm" (ngSubmit)="onFormSubmit()">
+        <div *ngIf="tenantConnectionValidity?.success" class="form-note">
+            Congratulations! The ISV integration settings was just now tested
+            and they are valid. For more detailed testing of the prerequisites
+            required for this application, please
+            <a routerLink="../run-setup">run and test your entire setup</a> to
+            find out if all the prerequisites are in place.
+        </div>
+        <div
+            *ngIf="
+                !!tenantConnectionValidity && !tenantConnectionValidity?.success
+            "
+            class="form-note error"
+        >
+            {{ tenantConnectionValidity?.message }}
+        </div>
+        <div class="error-message mt-1">
+            Note: Please refer to the
+            <a class="error-message" routerLink="../setup-instructions"
+                >Setup instructions</a
+            >
+            for the steps to integrate the application with ISV tenant.
+        </div>
+        <div *ngFor="let field of inputType" class="input-field">
+            <label
+                *ngIf="!hiddenFields.includes(field.formName)"
+                class="form-label"
+                for="{{ field.label }}"
+                >{{ field.label }}</label
+            >
+            <label *ngIf="getHelperText(field.formName)" class="helper-text">
+                {{ getHelperText(field.formName) }}
+            </label>
+            <input
+                class="form-input"
+                placeholder="{{ field.placeholder }}"
+                id="{{ field.label }}"
+                [formControlName]="field.formName"
+                [type]="field.type"
+                [ngClass]="{
+                    'error-border':
+                        errorData &&
+                        errorData[field.formName] === false &&
+                        !tenantConfigureForm.controls[field.formName].touched
+                }"
+                [hidden]="hiddenFields.includes(field.formName)"
+                [readOnly]="readOnlyFields.includes(field.formName)"
+                [placeholder]="getPlaceholder(field.formName)"
+            />
+
+            <div
+                *ngIf="
+                    (errorData &&
+                        errorData[field.formName] === false &&
+                        !tenantConfigureForm.controls[field.formName]
+                            .touched) ||
+                    (tenantConfigureForm.controls[field.formName].invalid &&
+                        !hiddenFields.includes(field.formName))
+                "
+                class="error-message"
+            >
+                The value is either invalid or not matching with the ISV
+                configuration.
+            </div>
+        </div>
+        <button [type]="buttonType.type" class="btn btn-large">
+            {{ buttonType.name }}
+        </button>
+    </form>
+</div>
