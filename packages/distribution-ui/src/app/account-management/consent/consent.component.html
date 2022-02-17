@@ -1,0 +1,34 @@
+<div class="form-container">
+    <div class="form-heading">
+        {{ heading }}
+        <span class="form-subtitle flex">{{ title }}</span>
+    </div>
+    <form [formGroup]="consentManageForm" (ngSubmit)="onSubmit()">
+        <div *ngFor="let option of consentsDescription">
+            <label
+                *ngIf="
+                    option.display !== 'hide' &&
+                    option.rule !== 'ASSENT_IMPLICIT'
+                "
+                [ngClass]="
+                    option.display === 'transparent' ? 'transparent' : ''
+                "
+            >
+                <input
+                    class="filled-in"
+                    type="checkbox"
+                    [formControlName]="option.formFieldName"
+                    (click)="change($event, option.formFieldName)"
+                /><span class="input-field" [innerHtml]="option.label"></span>
+            </label>
+        </div>
+        <button
+            type="submit"
+            class="btn btn-large mt-2"
+            [disabled]="btnErrorDisabled || !consentRevokePayload.length"
+        >
+            Save
+        </button>
+    </form>
+</div>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>

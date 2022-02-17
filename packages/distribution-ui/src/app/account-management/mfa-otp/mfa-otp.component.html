@@ -1,0 +1,41 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<div class="form-container" *ngIf="!loading">
+    <h3>Two-factor-authentication</h3>
+    <div class="form-subtitle">
+        Please check the
+        {{ this.state?.type === 'smsotp' ? 'phone' : 'email' }} you used to
+        register and
+    </div>
+    <div class="form-subtitle">
+        enter the code (last 6 digits of otp) provided in the field below.
+    </div>
+    <p *ngIf="countDownTime && !error">
+        Your OTP expires in {{ countDownTime }}
+    </p>
+    <ng-container>
+        <div class="input-field inline-input-field">
+            <input
+                *ngIf="correlation"
+                class="correlation-field"
+                type="text"
+                [disabled]="true"
+                [value]="correlation + ' - '"
+            />
+            <input [(ngModel)]="otp" placeholder="Enter otp" required />
+        </div>
+        <p *ngIf="error" class="err-msg">
+            {{ error }}
+        </p>
+        <button
+            class="btn btn-large mt-2"
+            (click)="onSubmit()"
+            [disabled]="!otp"
+        >
+            Submit
+        </button>
+        <div class="justify-flex-end ">
+            <a (click)="onResendOtp()" class="a mt-1">Resend OTP</a>
+        </div>
+    </ng-container>
+</div>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>

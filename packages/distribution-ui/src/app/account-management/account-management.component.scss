@@ -1,0 +1,51 @@
+.account-container {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background: #fff;
+    top: 6%;
+    padding-top: 7rem;
+    overflow: auto;
+}
+.user-name {
+    color: #707070;
+}
+.configure-container {
+    display: flex;
+    padding: 0 2rem;
+    > .details {
+        width: 80%;
+    }
+}
+
+a {
+    color: #707070;
+    border-bottom: 1px solid;
+}
+
+.configure-nav {
+    width: 290px;
+    padding: 5rem 3rem 0 3rem;
+    border: 1px solid #c4c4c4;
+    border-radius: 0.87rem;
+    left: 2%;
+    background: #fff;
+    .nav-item {
+        display: flex;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: all 0.25s ease-in-out;
+        font-size: 1rem;
+        border-bottom: 0;
+        &.active-link {
+            color: #003c6d;
+        }
+    }
+}
+
+hr {
+    border-bottom: 1px solid #9b9b9b;
+    margin: 2rem auto;
+}

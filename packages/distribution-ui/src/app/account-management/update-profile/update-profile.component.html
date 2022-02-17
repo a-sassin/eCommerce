@@ -1,0 +1,100 @@
+<div class="form-container">
+    <div class="form-heading flex justify-space-between">
+        <span class="title">{{ message.msg }}</span>
+        <button class="btn-link" (click)="deleteAcc()">
+            Delete Account
+        </button>
+    </div>
+    <div>
+        <form [formGroup]="accountForm" (ngSubmit)="onManageFormSubmit()">
+            <div class="input-field" *ngFor="let field of formFields">
+                <label class="form-label" for="{{ field.label }}"
+                    >{{ field.label }}
+                    <span
+                        class="dob-span err-msg"
+                        *ngIf="
+                            field.fieldName === 'birthdayDate' && isGetDiscount
+                        "
+                        >Please fill the DOB to get discount</span
+                    >
+                </label>
+                <input
+                    class="form-input"
+                    placeholder="{{ field.placeholder }}"
+                    id="{{ field.label }}"
+                    [formControlName]="field.fieldName"
+                    [ngClass]="[field.nooutline ? 'disabled' : '']"
+                    [readonly]="field.readonly"
+                    [type]="field.type || 'text'"
+                    [max]="date"
+                    *ngIf="field.fieldName !== 'birthdayDate' || !isGetDiscount"
+                />
+                <input
+                    appAutoFocus
+                    class="form-input"
+                    placeholder="{{ field.placeholder }}"
+                    id="{{ field.label }}"
+                    [formControlName]="field.fieldName"
+                    [ngClass]="[field.nooutline ? 'disabled' : '']"
+                    [readonly]="field.readonly"
+                    [type]="field.type"
+                    [max]="date"
+                    *ngIf="field.fieldName === 'birthdayDate' && isGetDiscount"
+                />
+                <span
+                    *ngIf="
+                        this.accountForm.get(field.fieldName).invalid &&
+                        this.accountForm.get(field.fieldName).touched
+                    "
+                    class="error-message"
+                    >{{ errMessage }} {{ field.label | lowercase }}</span
+                >
+            </div>
+            <button
+                class="btn btn-large"
+                [type]="message.btn.type"
+                [disabled]="accountForm.invalid || !accountForm.dirty"
+            >
+                {{ message.btn.name }}
+            </button>
+        </form>
+    </div>
+    <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+</div>
+
+<app-dialog
+    [header]="header"
+    [subHeader]="subHeader"
+    [content]="content"
+    [show]="showDeleteModal"
+    class="delete-modal"
+    [isTransparent]="true"
+    modalName="delete"
+    [isDeleteModal]="true"
+>
+    <div class="input-field">
+        <label for="">{{ deleteConfirmText }}</label>
+        <input
+            type="text"
+            class="form-input"
+            [placeholder]="fullname"
+            [ngModel]="fullnameNgModelDelete"
+            (ngModelChange)="onMatchingFullname($event)"
+        />
+        <div class="err-msg" *ngIf="isDeleteError">
+            {{ deleteErrMsg }}
+        </div>
+    </div>
+    <div class="flex btn-right-side">
+        <button class="btn cancel mr-1" (click)="showDeleteModal = false">
+            Cancel
+        </button>
+        <button
+            class="btn confirm"
+            (click)="confirmDialog()"
+            [disabled]="confirmBtnDisabled"
+        >
+            Confirm
+        </button>
+    </div>
+</app-dialog>

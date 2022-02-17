@@ -1,0 +1,65 @@
+<div class="form-container">
+    <h3>Setup two-factor authentication</h3>
+    <div class="form-subtitle">choose your own authenticaiton method</div>
+
+    <div class="mt-2">
+        <form [formGroup]="mfaOptionsForm" (ngSubmit)="onSelectedMfaMethod()">
+            <div *ngFor="let option of radioLabel">
+                <label>
+                    <input
+                        type="radio"
+                        formControlName="isMobOrEmail"
+                        [value]="option.value"
+                        class="with-gap"
+                    /><span
+                        >{{ option.name }}
+                        <span
+                            class="btn-info"
+                            *ngIf="option.name === 'SMS' && registeredNumber"
+                        >
+                            - Registered</span
+                        ></span
+                    >
+                </label>
+                <div
+                    *ngIf="option.name === 'SMS' && registeredNumber"
+                    class="registered-method-links"
+                >
+                    <span>{{ registeredNumber }}</span>
+                    <i class="material-icons" (click)="deleteEnrollment()"
+                        >delete</i
+                    >
+                </div>
+            </div>
+            <div
+                class="input-field"
+                *ngIf="
+                    mfaOptionsForm.get('isMobOrEmail').value ===
+                        'phoneNumber' && !registeredNumber
+                "
+            >
+                <label class="form-label"
+                    >Please enter the phone number you want to use for
+                    MFA</label
+                >
+                <input
+                    class="form-input"
+                    type="text"
+                    maxlength="16"
+                    minlength="7"
+                    formControlName="phoneNumber"
+                    placeholder="+1-209-8x4-xx81"
+                />
+            </div>
+            <button
+                type="submit"
+                color="primary"
+                class="btn btn-large mt-2"
+                [disabled]="mfaOptionsForm.invalid"
+            >
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>

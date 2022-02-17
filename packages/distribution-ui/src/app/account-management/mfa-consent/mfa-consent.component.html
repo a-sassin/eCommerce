@@ -1,0 +1,34 @@
+.
+<div class="form-container">
+    <div class="form-heading">Consent page</div>
+    <p>{{ phoneNumber }}</p>
+    <p *ngIf="phoneNumber">
+        {{ heading }}
+    </p>
+    <ng-container>
+        <form (ngSubmit)="onSubmit()" [formGroup]="consentForm">
+            <div class="inline mt-2">
+                <label>
+                    <input
+                        class="filled-in"
+                        type="checkbox"
+                        formControlName="termsAndConditions"
+                    /><span>I accept terms & Conditions</span>
+                </label>
+            </div>
+            <button
+                type="submit"
+                color="primary"
+                class="btn btn-large mt-2"
+                [disabled]="
+                    !consentForm?.get('termsAndConditions')?.value ||
+                    !phoneNumber ||
+                    btnErrorDisabled
+                "
+            >
+                Continue
+            </button>
+        </form>
+    </ng-container>
+</div>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>

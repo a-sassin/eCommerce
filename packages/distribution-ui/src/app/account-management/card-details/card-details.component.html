@@ -1,0 +1,21 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<div class="form-container form-min-height">
+    <div class="form-heading">
+        {{ heading }}
+    </div>
+    <table>
+        <tr>
+            <th *ngFor="let tableheading of tableHeadings">
+                {{ tableheading }}
+            </th>
+        </tr>
+        <ng-container *ngIf="cardData">
+            <tr *ngFor="let card of cardData">
+                <td>{{ card.fullName }}</td>
+                <td>{{ card.cardType }}</td>
+                <td>{{ card.cardNum }}</td>
+                <td>{{ card.cardExpiration }}</td>
+            </tr>
+        </ng-container>
+    </table>
+</div>

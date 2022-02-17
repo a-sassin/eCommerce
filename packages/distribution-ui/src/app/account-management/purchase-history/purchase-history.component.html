@@ -1,0 +1,76 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<div class="form-container">
+    <div class="form-heading">
+        <div class="rowItems">
+            <div>
+                <span class="title">{{ title }}</span>
+                <div class="form-subtitle">{{ subTitle }}</div>
+            </div>
+            <div class="search-box">
+                <mat-icon>search</mat-icon>
+                <input
+                    class="input"
+                    type="text"
+                    placeholder="Search Purchase History"
+                />
+            </div>
+        </div>
+    </div>
+
+    <div></div>
+
+    <div *ngIf="productDetails" class="dynamic">
+        <div class="purchasedMsg">
+            {{ deliverMsg }}
+        </div>
+        <div class="rowItems">
+            <img
+                [src]="baseUrl + productDetails?.productImageUrl"
+                alt="item-image"
+                class="img"
+            />
+            <div>
+                <p class="product-name">
+                    {{ productDetails?.productFullName }}
+                </p>
+                <p class="product-type">{{ productDetails?.productType }}</p>
+                <i class="material-icons" *ngFor="let n of numSequence(5)"
+                    >star_outline</i
+                >
+            </div>
+        </div>
+        <div class="rowItems">
+            <button class="btn reorderBtn">{{ reorderText }}</button>
+            <div class="btn-link invoice">{{ downloadInvoice }}</div>
+        </div>
+
+        <hr />
+    </div>
+
+    <div class="dummy">
+        <div class="purchasedMsg">
+            {{ purchasedDateMsg }}
+        </div>
+        <div class="rowItems">
+            <img
+                [src]="baseUrl + dummyProductInfo?.productImageUrl"
+                alt="item-image"
+                class="img"
+            />
+            <div>
+                <p class="product-name">
+                    {{ dummyProductInfo?.productFullName }}
+                </p>
+                <p class="product-type">{{ dummyProductInfo?.productType }}</p>
+                <i class="material-icons" *ngFor="let n of numSequence(5)"
+                    >star_outline</i
+                >
+            </div>
+        </div>
+        <div class="rowItems">
+            <button class="btn reorderBtn">{{ reorderText }}</button>
+            <div class="btn-link invoice">{{ downloadInvoice }}</div>
+            <p class="reward">{{ rewardPtMsg }}</p>
+        </div>
+    </div>
+</div>

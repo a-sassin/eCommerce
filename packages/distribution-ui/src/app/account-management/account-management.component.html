@@ -1,0 +1,53 @@
+<div class="">
+    <div class="configure-container">
+        <div class="configure-nav">
+            <div>
+                <span>My Profile</span><br />
+                <span class="user-name">{{ userData.name }}</span>
+            </div>
+            <hr />
+            <a
+                class="nav-item"
+                routerLink="/account-manage"
+                routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{ exact: true }"
+                >Account details</a
+            >
+            <a
+                class="nav-item"
+                routerLink="mfa-methods"
+                routerLinkActive="active-link"
+                >Security settings</a
+            >
+            <a
+                class="nav-item"
+                routerLink="social-accounts"
+                routerLinkActive="active-link"
+                >Linked Account</a
+            >
+            <a
+                class="nav-item"
+                routerLink="consent"
+                routerLinkActive="active-link"
+                >Privacy and Consent</a
+            >
+            <a
+                class="nav-item"
+                routerLink="purchase-history"
+                routerLinkActive="active-link"
+                >Purchase History</a
+            >
+            <a
+                class="nav-item"
+                routerLink="card-details"
+                routerLinkActive="active-link"
+                >Credit card details</a
+            >
+            <a class="nav-item" (click)="changePassword()">Change Password</a>
+            <a class="nav-item" (click)="logout()">Logout</a>
+        </div>
+        <div class="details">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
