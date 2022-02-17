@@ -1,0 +1,11 @@
+<app-header *ngIf="checkRoutes()"></app-header>
+<div class="main-container"><router-outlet> </router-outlet></div>
+<app-notification></app-notification>
+<app-create-account-consents
+    (closeDialog)="isShowConsentDia = false"
+    [consentInfo]="consentInfo"
+    *ngIf="checkRoutes() && isShowConsentDia && (msg1 || msg2)"
+    [consentValue]="consentValue"
+    [consentTerm]="msg1"
+    [consentCommunication]="msg2"
+></app-create-account-consents>
